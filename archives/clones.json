@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Rex",
+    "rank": "Capitan",
+    "designation": "clon de infanteria",
+    "num_serie": "CT-7567",
+    "squadron": "Legion 501",
+    "id": 1
+  },
+  {
+    "name": "Cody",
+    "rank": "Comandante",
+    "designation": "clon de infanteria",
+    "num_serie": "CT-2224",
+    "squadron": "Batallon 212",
+    "id": 2
+  },
+  {
+    "name": "Hunter",
+    "rank": "Sargento",
+    "designation": "clon de infanteria",
+    "num_serie": "CT-9901",
+    "squadron": "Escuadron 99",
+    "id": 3
+  }
+]

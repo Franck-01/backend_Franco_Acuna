@@ -1,0 +1,22 @@
+{
+  "name": "paquete",
+  "version": "1.0.0",
+  "description": "",
+  "main": "administrator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Franck-01/backend_Franco_Acuna.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Franck-01/backend_Franco_Acuna/issues"
+  },
+  "homepage": "https://github.com/Franck-01/backend_Franco_Acuna#readme",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
+}

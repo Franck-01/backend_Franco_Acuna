@@ -1,7 +1,6 @@
 {
   "name": "paquete",
   "version": "1.0.0",
-  "description": "",
   "main": "administrator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +16,9 @@
   },
   "homepage": "https://github.com/Franck-01/backend_Franco_Acuna#readme",
   "dependencies": {
+    "express": "^4.17.2",
     "moment": "^2.29.1"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }

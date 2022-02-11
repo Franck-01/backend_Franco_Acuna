@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Asuka Sohryu",
+    "thumbnail": "http://localhost:8080/img/1644544445666-asukaSohryu.png",
+    "id": 1
+  },
+  {
+    "name": "Misato",
+    "thumbnail": "http://localhost:8080/img/1644544460335-Captain_Misato.jpg",
+    "id": 2
+  },
+  {
+    "name": "rei",
+    "thumbnail": "http://localhost:8080/img/1644544485557-reiAyanami-S.jpg",
+    "id": 3
+  }
+]

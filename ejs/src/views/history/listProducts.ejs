@@ -1,0 +1,15 @@
+<% if (ecommers.length>0) { %>
+    <% ecommers.forEach(command => { %>
+        <div>
+            <p>
+                <%=command.name %> :
+                    <%=command.model  %>
+            </p>
+            <img>
+            <%= command.img  %> años
+                </img>
+        </div>
+        <% }) %>
+            <% } else { %>
+                <p>AUN NO HAY NADA</p>
+                <% } %>

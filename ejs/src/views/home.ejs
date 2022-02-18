@@ -1,0 +1,17 @@
+<h1>Bienvenido a nuestro <i>E-COMMERS: Fleet-Army</i></h1>
+<h2>A continuación veras algunos de los productos que te podemos afrecer</h2>
+<h3>Puedes registrarte rellenando los siguientes campos:</h3>
+<form action="/users" method="post">
+    <label>Rango</label>
+    <input name="rank">
+    <label>Nombre</label>
+    <input name="name">
+    <label>Edad</label>
+    <input name="age">
+    <p>Cuentanos un poco de ti, y lo hara tu flota bajo tu cargo</p>
+    <label>Descripcion</label>
+    <input name="description">
+    <button>Enviar</button>
+</form>
+
+<%- include('./history/history',{users:users}) %>

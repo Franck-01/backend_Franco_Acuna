@@ -15,5 +15,18 @@ router.post("/", uploader.single("file"), (req, res) => {
     pilot.thumbnail = req.protocol + "://" + req.hostname + ":8080/img/" + file.filename
     pilotService.add(pilot).then(result => res.send(result))
 })
+router.put("/:id", async(req, res) => {
+    let { id } = req.params;
+
+    let dataFIle = await Container.getById(id);
+    if (dataFIle == "NULL") {
+        return res.send({ MSG: "Id no encontrado" });
+    }
+
+    let newData = req.body;
+    let upDateItem = await Container.updateById(id, newData);
+    res.send(upDateItem);
+})
+
 
 module.exports = router

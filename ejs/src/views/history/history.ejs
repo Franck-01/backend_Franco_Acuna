@@ -1,0 +1,19 @@
+<% if (users.length>0) { %>
+    <% users.forEach(user => { %>
+        <div>
+            <p>
+                <%=user.rank %> :
+                    <%=user.name  %>
+            </p>
+            <p>
+                Cuenta con
+                <%= user.age  %> años
+            </p>
+            <p>
+                <%= user.description  %>
+            </p>
+        </div>
+        <% }) %>
+            <% } else { %>
+                <p>Por ahora, no hay informacion disponible</p>
+                <% } %>

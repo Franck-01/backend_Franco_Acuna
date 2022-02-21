@@ -1,6 +1,6 @@
 const fs = require("fs")
 
-const pathToProducts = __dirname + "../file/products"
+const pathToProducts = __dirname + "/../files/products"
 
 class FleetManager {
 

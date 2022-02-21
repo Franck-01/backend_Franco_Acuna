@@ -12,9 +12,15 @@ app.use(express.urlencoded({ extended: true }))
 
 let users = [];
 let ecommers = []
+app.get("/", (req, res) => {
+    res.render("index.ejs", {
+        users,
+        ecommers
+    })
+})
 app.get('/', (req, res) => {
 
-    res.render('home', {
+    res.render('usersCreated', {
         users
     })
 })
@@ -23,7 +29,7 @@ app.post('/users', (req, res) => {
     res.redirect('/')
 })
 app.get('/products', (req, res) => {
-    res.render("products", {
+    res.render("productsArray", {
         ecommers
     })
     app.use("/products", produc)

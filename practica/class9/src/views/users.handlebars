@@ -1,0 +1,15 @@
+<div>
+    {{#if users}}
+    {{#each users}}
+<ul>
+    
+    <li>
+        <p>{{this.first_name}}</p>
+        <p>{{this.last_name}}</p>
+        <p>{{this.age}}</p>
+    </li>
+    
+</ul>
+{{/each}}
+    {{/if}}
+</div>

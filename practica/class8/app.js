@@ -1,7 +1,6 @@
 const express = require("express")
 const multer = require("multer")
 const userRouter = require("./routes/users")
-const petsRouter = require("./routes/mascotas")
 const app = express()
 
 const PORT = 8080
@@ -12,7 +11,6 @@ app.use(express.json())
 app.use(express.static(__dirname + "/public"))
 
 app.use("/users", userRouter)
-app.use("/pets", petsRouter)
 
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {

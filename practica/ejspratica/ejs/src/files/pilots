@@ -1,0 +1,25 @@
+[{
+        "name": "ARC-170",
+        "model": "Caza de combate",
+        "thumbnail": "http://localhost:8080/img/1645407437141-08ae6c35db460ca5c06cdb7e87eb07fa.jpg",
+        "id": 1
+    },
+    {
+        "name": "Venator",
+        "model": "destructor estelar",
+        "thumbnail": "http://localhost:8080/img/1645623517085-08ae6c35db460ca5c06cdb7e87eb07fa.jpg",
+        "id": 2
+    },
+    {
+        "name": "Venator",
+        "model": "destructor estelar",
+        "thumbnail": "http://localhost:8080/img/1645650628854-08ae6c35db460ca5c06cdb7e87eb07fa.jpg",
+        "id": 3
+    },
+    {
+        "name": "Venator",
+        "model": "destructor estelar",
+        "thumbnail": "http://localhost:8080/img/1645656729624-08ae6c35db460ca5c06cdb7e87eb07fa.jpg",
+        "id": 4
+    }
+]

@@ -27,6 +27,9 @@ router.put("/:id", async(req, res) => {
     let upDateItem = await Container.updateById(id, newData);
     res.send(upDateItem);
 })
+router.get("/products", (req, res) => {
+    service.getAll().then(result => console.log(result))
+})
 
 
 module.exports = router

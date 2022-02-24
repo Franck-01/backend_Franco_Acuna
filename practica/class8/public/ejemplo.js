@@ -1,5 +1,4 @@
 let usersForm = document.getElementById("usersForm")
-let petsForm = document.getElementById("petsForm")
 
 const handleSubmit = (evt, form, route) => {
     evt.preventDefault()
@@ -17,4 +16,3 @@ const handleSubmit = (evt, form, route) => {
 }
 
 usersForm.addEventListener("submit", (e) => handleSubmit(e, e.target, "/users"))
-petsForm.addEventListener("submit", (e) => handleSubmit(e, e.target, "/pets"))

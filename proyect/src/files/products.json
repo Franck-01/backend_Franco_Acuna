@@ -1,0 +1,26 @@
+[
+  {
+    "name": "TIE Fighter",
+    "model": "Caza de combate",
+    "URL_img": "https://i.pinimg.com/564x/4d/db/e4/4ddbe46184d8db32a17a372e8e2759cc.jpg",
+    "id": 1
+  },
+  {
+    "name": "ARC-170 Starfighter",
+    "model": "Caza de combate",
+    "URL_img": "https://i.pinimg.com/originals/c9/21/b9/c921b926bf13588e2fb7203f21e53938.jpg",
+    "id": 2
+  },
+  {
+    "name": "TIE Defender",
+    "model": "Caza de combate",
+    "URL_img": "https://i.pinimg.com/736x/d6/1b/72/d61b72c1aa040cf19493f0e2dbc61580.jpg",
+    "id": 3
+  },
+  {
+    "name": "TIE Interceptor",
+    "model": "Interceptor",
+    "URL_img": "https://i.pinimg.com/736x/d6/1b/72/d61b72c1aa040cf19493f0e2dbc61580.jpg",
+    "id": 4
+  }
+]

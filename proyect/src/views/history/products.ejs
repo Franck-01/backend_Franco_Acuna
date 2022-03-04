@@ -1,0 +1,15 @@
+<% if (productJSON.length>0) { %>
+    <% productJSON.forEach(product => { %>
+        <div>
+            <p>
+                <%=product.name  %>
+            </p>
+            <p>
+                <%= product.model  %>
+            </p>
+            <img src=<%=product.URL_img %>>
+        </div>
+        <% }) %>
+            <% } else { %>
+                <p>Por ahora, no hay informacion disponible</p>
+                <% } %>

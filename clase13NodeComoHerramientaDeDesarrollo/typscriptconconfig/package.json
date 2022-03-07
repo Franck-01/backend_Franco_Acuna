@@ -1,0 +1,19 @@
+{
+  "name": "typscriptconconfig",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "initconfig":"tsc --int",
+    "build": "tsc",
+    "start":"node dest/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.5.5"
+  }
+}

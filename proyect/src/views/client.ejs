@@ -1,0 +1,42 @@
+<div>
+    <h1>Productos</h1>
+    <form id="productsForm">
+        <label>Nombre</label>
+        <input name="name">
+        <label>modelo</label>
+        <input name="model">
+        <label>URL de la imagen</label>
+        <input name="URL_img">
+        <input type="submit">
+    </form>
+    <span id="views"></span>
+    <%- include('./history/products',{productJSON:productJSON}) %>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://unpkg.com/ejs@3.1.6/ejs.min.js"></script>
+        <script>
+            const socket = io()
+            let form = document.getElementById("productsForm")
+            form.addEventListener("submit", (evt) => {
+                evt.preventDefault()
+                let data = new FormData(form)
+                let sendObj = {}
+                data.forEach((val, key) => sendObj[key] = val)
+                socket.emit("sendProducts", sendObj)
+                form.reset()
+            })
+
+            socket.on("productsLog", (data) => {
+                let products = data.payload
+                let productsViews = document.getElementById("views")
+                fetch("history/products.ejs").then(response => {
+                    return response.text();
+                }).then(template => {
+                    const processe = ejs.compile(template);
+                    const html = processe({
+                        products
+                    })
+                    productsViews.innerHTML = html
+                })
+            })
+        </script>
+</div>

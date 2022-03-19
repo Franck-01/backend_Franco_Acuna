@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>Admin/Productos</h1>
+        <form id="productForm">
+            <labe>Nombre</labe>
+            <input name="name">
+            <label>Modelo</label>
+            <input name="model">
+            <label>Descripcion</label>
+            <input name="description">
+            <labe>Precio</labe>
+            <input name="price">
+            <labe>URL de la imagen</labe>
+            <input name="img_URL">
+            <labe>Codigo para el producto</labe>
+            <input name="code">
+            <label>Stock del producto</label>
+            <input name="stock">
+            <input type="submit">
+        </form>
+        <span id="views"></span>
+
+        <%- include('./history/history',{product:product}) %>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/ejs@3.1.6/ejs.min.js"></script>
+    <script>
+        const socket = io();
+
+        let form = document.getElementById("productForm");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let data = new FormData(form);
+            let sendObj = {};
+            data.forEach((val, key) => (sendObj[key] = val));
+            socket.emit("sendProduct", sendObj);
+            form.reset();
+        });
+
+        socket.on("productLog", (data) => {
+            let products = data.payload
+            let productsViews = document.getElementById("views");
+            fetch("history/history.ejs").then((response) => {
+                return response.text();
+            }).then(template => {
+                const processe = ejs.compile(template);
+                const html = processe({
+                    products
+                })
+                productsViews.innerHTML = html
+            })
+        })
+    </script>
+</body>
+
+</html>

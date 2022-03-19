@@ -1,0 +1,27 @@
+<% if (product.length>0) { %>
+    <% product.forEach(products => { %>
+        <div>
+            <p>
+                <%=products.name  %>
+            </p>
+            <p>
+                <%= products.model  %>
+            </p>
+            <p>
+                <%= products.description  %>
+            </p>
+            <p>
+                <%= products.price  %>
+            </p>
+            <img src="<%=products.img_URL %>">
+            <p>
+                <%= products.code  %>
+            </p>
+            <p>
+                <%= products.stock  %>
+            </p>
+        </div>
+        <% }) %>
+            <% } else { %>
+                <p>Por ahora, no hay informacion disponible</p>
+                <% } %>

@@ -2,7 +2,7 @@ const express = require("express")
 const produc = require("./routes/products")
 const app = express()
 
-const server = app.listen(8080, () => console.log("Welcome to my server"))
+const server = app.listen(8000, () => console.log("Welcome to my server"))
 
 app.set('views', __dirname + '/views')
 app.set('routes', __dirname + '/routes')

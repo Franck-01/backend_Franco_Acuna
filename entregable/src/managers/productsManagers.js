@@ -30,13 +30,7 @@ class productsManager {
         }
     }
     addProduct = async(product) => {
-        if (!product.name ||
-            !product.model ||
-            !product.description ||
-            !product.price ||
-            !product.URL_img
-        )
-            return { status: "error", error: "missing field" };
+        if (!product.name || !product.model || !product.description || !product.price || !product.URL_img) return { status: "error", error: "missing field" };
         try {
             if (fs.existsSync(productsPath)) {
                 let products = await fetch()

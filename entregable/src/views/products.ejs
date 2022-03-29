@@ -1,0 +1,61 @@
+<div>
+    <h1>Productos</h1>
+    <form id="productsForm">
+        <label>Nombre</label>
+        <input name="name">
+        <label>Modelo</label>
+        <input name="model">
+        <label>Descripcion</label>
+        <input name="description">
+        <label>Precio</label>
+        <input name="price">
+        <label>URL de la imagen</label>
+        <input name="URL_img">
+        <input type="submit">
+    </form>
+    <span id="products-container" class="pilot-container"></span>
+</div>
+<script>
+    let products;
+    fetch('/products').then(result => result.json()).then(json => {
+        products = json.payload;
+        let container = document.getElementById('products-container');
+        products.forEach(product => {
+            let card = document.createElement('div');
+            card.setAttribute('class', 'pilot-card');
+            let name = document.createElement('p');
+            name.setAttribute('class', 'pilot-text');
+            name.innerHTML = product.name;
+            let model = document.createElement('p');
+            model.setAttribute('class', 'pilot-text');
+            model.innerHTML = product.model;
+            let description = document.createElement('p');
+            description.setAttribute('class', 'pilot-text');
+            description.innerHTML = product.description;
+            let price = document.createElement('p');
+            price.setAttribute('class', 'pilot-text');
+            price.innerHTML = product.price;
+            let URL_img = document.createElement('img');
+            URL_img.src = product.URL_img;
+            card.append(name);
+            card.append(model);
+            card.append(description);
+            card.append(price);
+            card.append(URL_img);
+            container.append(card);
+        })
+    })
+    let form = document.getElementById('productsForm');
+    const handleSubmit = (evt, form, route) => {
+        evt.preventDefault();
+        let formData = new FormData(form);
+        fetch(route, {
+                method: "POST",
+                body: formData
+            })
+            .then(result => result.json()).then(json => console.log(json))
+        form.reset();
+    }
+    form.addEventListener('submit', (e) => handleSubmit(e, e.target, '/products'))
+</script>
+<%- include('./history/productsH',{ecommers:ecommers}) %>

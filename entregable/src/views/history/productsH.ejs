@@ -1,0 +1,21 @@
+<% if (ecommers.length>0) { %>
+    <% ecommers.forEach(product => { %>
+        <div>
+            <p>
+                <%=product.name  %>
+            </p>
+            <p>
+                <%=product.model  %>
+            </p>
+            <p>
+                <%=product.description  %>
+            </p>
+            <p>
+                <%=product.price  %>
+            </p>
+            <img src="<%=product.URL_img%>">
+        </div>
+        <% }) %>
+            <% } else { %>
+                <p>Por ahora, no hay informacion disponible</p>
+                <% } %>

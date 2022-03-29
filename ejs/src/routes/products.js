@@ -3,7 +3,7 @@ const router = express.Router()
 const uploader = require("../services/upload")
 const FleetManager = require("../Managers/products")
 
-let service = new FleetManager()
+const service = new FleetManager()
 
 router.get("/", (req, res) => {
     service.get().then(result => res.send(result))

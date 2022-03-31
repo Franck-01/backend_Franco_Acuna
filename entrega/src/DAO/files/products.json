@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Clone Head Hunter Z-95",
+    "model": "Caza de combate",
+    "stock": "260",
+    "price": "75",
+    "id": 1
+  },
+  {
+    "name": "ARC-170 Starfighter",
+    "model": "Caza de combate",
+    "stock": "300",
+    "price": "180",
+    "id": 2
+  },
+  {
+    "name": "TIE_IN",
+    "model": "Interceptor",
+    "stock": "330",
+    "price": "120",
+    "id": 3
+  },
+  {
+    "name": "TIE_D",
+    "model": "Caza de combate",
+    "stock": "120",
+    "price": "300",
+    "id": 4
+  },
+  {
+    "name": "Y-Wing",
+    "model": "Bombardero",
+    "stock": "240",
+    "price": "140",
+    "id": 5
+  },
+  {
+    "name": "Hiena",
+    "model": "Bombardero",
+    "stock": "250",
+    "price": "25",
+    "id": 6
+  },
+  {
+    "name": "Tri-caza",
+    "model": "Interceptor",
+    "stock": "260",
+    "price": "20",
+    "id": 7
+  },
+  {
+    "name": "A-Wing",
+    "model": "Interceptor",
+    "stock": "230",
+    "price": "175",
+    "id": 8
+  },
+  {
+    "name": "X-Wing",
+    "model": "Caza de combate",
+    "stock": "240",
+    "price": "150",
+    "id": 9
+  }
+]

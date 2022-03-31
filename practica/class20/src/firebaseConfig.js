@@ -16,7 +16,7 @@ const CRUD = async() => {
     await doc.create({ name: "Franco", dni: 43390950 })*/
 
     //INSERTAR DE A VARIOS / INSERT MANY
-    /*let users = [
+    let users = [
         { name: "Mauricio", dni: 4352352 },
         { name: "Marisol", dni: 4352352 },
         { name: "Lila", dni: 4352352 },
@@ -27,7 +27,7 @@ const CRUD = async() => {
         let refDoc = collection.doc()
         batch.set(refDoc, doc)
     })
-    await batch.commit()*/
+    await batch.commit()
 
     // TRAER / GET
     /*const snapShot = await collection.get()

@@ -1,0 +1,57 @@
+html {
+    background-repeat: no-repeat;
+    background-image: url("https://img5.goodfon.com/wallpaper/nbig/1/77/star-wars-mandalorian-yoda-baby-yoda-2020.jpg");
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.swal2 {
+    color: white;
+}
+
+.swal2-html-container {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: column !important;
+}
+
+.swal2-input {
+    width: 80% !important;
+    margin: .3em 0 1em !important;
+}
+
+.chatMessage {
+    display: flex;
+    flex-direction: row;
+}
+
+.email {
+    font-weight: bold;
+    color: rgb(37, 37, 134);
+}
+
+.time {
+    color: rgb(151, 40, 40);
+    order: 2;
+    margin-left: auto;
+}
+
+.message {
+    color: #008800;
+    font-style: italic;
+}
+
+.formulate {
+    color: white;
+}
+
+.formulate input {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 100%);
+    color: white;
+    padding: 1%;
+    margin-left: 4%;
+    margin-right: 4%;
+}

@@ -1,5 +1,6 @@
 const express = require("express")
 const { normalize, schema } = require("normalizr")
+const form = require("./files/principal.json")
 const moment = require("moment")
 const { Server } = require("socket.io")
 const principalManager = require("./manager/PrincipalManager.js")
@@ -11,7 +12,12 @@ const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`))
 const io = new Server(server)
 
-app.use(express.static(__dirname + '/public'))
+app.set("views", __dirname + "/views")
+app.set("files", __dirname + "/files")
+app.set("view engine", "ejs")
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 let log = []
 const generateLog = {
@@ -19,6 +25,16 @@ const generateLog = {
     name: "Chat general",
     log: log
 }
+app.get("/", (req, res) => {
+    res.render("index.ejs", {
+        form
+    })
+})
+app.post("/products", (req, res) => {
+    form.push(req.body)
+    res.redirect("/")
+})
+
 io.on("connection", async socket => {
     console.log("Estas conectado")
     let principal = await principalServices.getAll()
@@ -29,6 +45,7 @@ io.on("connection", async socket => {
         await principalServices.add(data)
         let principal = await principalServices.getAll()
         io.emit("princLog", principal)
+        socket.emit("ChatLog", log)
     })
     socket.on('userInfo', (data) => {
         data.time = moment().format("HH:mm DD/MM")

@@ -1,0 +1,18 @@
+<% if (form.length>0) { %>
+    <% form.forEach(forms => { %>
+        <div>
+            <p>
+                <%=forms.name  %>
+            </p>
+            <p>
+                <%= forms.model  %>
+            </p>
+            <p>
+                <%= forms.faction  %>
+            </p>
+            <img src=<%=forms.img %>>
+        </div>
+        <% }) %>
+            <% } else { %>
+                <p>Por ahora, no hay informacion disponible</p>
+                <% } %>

@@ -11,5 +11,19 @@
     "faction": "Republica",
     "img": "http://pm1.narvii.com/6245/0b971eb50fa1bcd128c4ebd2df779627e535c512_00.jpg",
     "id": 2
+  },
+  {
+    "name": "TIE Defender",
+    "model": "Caza de combate",
+    "faction": "Imperio Galactico",
+    "img": "https://i.pinimg.com/736x/d6/1b/72/d61b72c1aa040cf19493f0e2dbc61580.jpg",
+    "id": 3
+  },
+  {
+    "name": "TIE Defender",
+    "model": "Caza de combate",
+    "faction": "Imperio Galactico",
+    "img": "https://i.pinimg.com/736x/d6/1b/72/d61b72c1aa040cf19493f0e2dbc61580.jpg",
+    "id": 4
   }
 ]

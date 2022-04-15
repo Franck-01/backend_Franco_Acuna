@@ -5,7 +5,7 @@ const productsManager = require("./Managers/productsManagers.js")
 
 const servicesData = new productsManager()
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`))
 const io = new Server(server)
 

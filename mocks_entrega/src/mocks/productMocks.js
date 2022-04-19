@@ -1,7 +1,7 @@
 const faker = require("faker")
-const memoryCont = require("../container/memoryCont.js")
+const PrincipalManager = require("../manager/PrincipalManager.js")
 
-class productManager extends memoryCont {
+class productManager extends PrincipalManager {
     constructor() {
         super()
     }

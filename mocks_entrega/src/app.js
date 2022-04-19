@@ -37,11 +37,7 @@ app.post("/products", (req, res) => {
 
 io.on("connection", async socket => {
     console.log("Estas conectado")
-    let principal = await principalServices.getAll()
-    io.emit("princLog", principal)
-    socket.emit("ChatLog", log)
-
-    socket.on("sentPrinc", async(data) => {
+    socket.on("sentPrinc", async data => {
         await principalServices.add(data)
         let principal = await principalServices.getAll()
         io.emit("princLog", principal)
@@ -50,6 +46,7 @@ io.on("connection", async socket => {
     socket.on('userInfo', (data) => {
         data.time = moment().format("HH:mm DD/MM")
         log.push(data)
+        io.emit("ChatLog", log)
         console.log(JSON.stringify(normalizedData, null, '\t'));
     })
 })

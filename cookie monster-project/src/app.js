@@ -17,6 +17,7 @@ app.set("views", __dirname + "/views")
 app.set("files", __dirname + "/files")
 app.set("view engine", "ejs")
 
+app.use(express.json())
 app.use(cookieParser())
 app.use(session({
     store: new FileStorage({ path: "./src/sessions", ttl: 3600, retries: 0 }),
@@ -27,7 +28,8 @@ app.use(session({
 
 app.get("/", (req, res) => {
     res.render("index.ejs", {
-        files
+        files,
+        users
     })
 })
 app.get("/product", (req, res) => {
@@ -39,15 +41,23 @@ app.post("/productsArray", (req, res) => {
     files.push(req.body)
     res.redirect("/product")
 })
-app.get("/userLogin", (req, res) => {
-    if (req.session.user) return res.send("Este usuario ya existe")
-    let { user } = req.query
-    req.session.user = user
-    res.render("user.ejs")
-})
-app.post("/userLogin", (req, res) => {
-    user.push(req.body)
+app.get("/user", (req, res) => {
+    let user = req.session.user
+    console.log(req.session)
+    if (user) return res.render("user.ejs", {
+        users
+    })
     res.redirect("/")
+})
+
+let users = []
+
+app.post("/userLogin", (req, res) => {
+    const { loginName } = req.body
+    users.push(req.body)
+    req.session.useData = users
+    res.redirect("/user")
+    console.log(users)
 })
 io.on("connection", async socket => {
     console.log("conection realizada")

@@ -1,16 +1,31 @@
 <div>
     <h2>Bienvenido</h2>
-    <form class="formuser" action="/userLogin" method="post">
-        <label>Cual es tu nombre?:</label>
-        <input id="nameuser" class="swal2-input">
+    <form class="formuser" action="/userLogin" method="post" enctype="multipart/form-data">
+        <label for="loginName">Cual es tu nombre?:</label>
+        <input name="nameuser" id="loginName" class="swal2-input">
         <label>Edad:</label>
-        <input id="age" class="swal2-input">
+        <input name="age" id="age" class="swal2-input">
         <label>nos faltaria un email:</label>
-        <input id="mail" class="swal2-input">
-        <input type="submit" value="Enviar" class="swal2-input">
+        <input name="mail" id="mail" class="swal2-input">
+        <input type="submit" value="Iniciar Sesion" class="swal2-input">
     </form>
-
 </div>
+<script>
+    let user
+    let formUser = document.getElementById("formuser")
+    let loginName = document.getElementById("loginName")
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let formData = new FormData(e.target)
+        fetch('/userLogin', {
+            method: 'POST',
+            body: formData
+        })
+        form.reset()
+    }
+    formUser.addEventListener("submit", (e) => handleSubmit(e))
+</script>
 <style>
     .formuser {
         text-align: center;

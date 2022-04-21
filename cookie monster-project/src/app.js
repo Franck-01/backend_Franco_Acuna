@@ -42,22 +42,30 @@ app.post("/productsArray", (req, res) => {
     res.redirect("/product")
 })
 app.get("/user", (req, res) => {
-    let user = req.session.user
-    console.log(req.session)
-    if (user) return res.render("user.ejs", {
+    if (req.session.user) return res.render("user.ejs", {
         users
     })
+    let { userCreate } = req.query
+    req.session.user = userCreate
     res.redirect("/")
+    res.send(`Bienvenido ${userCreate}`)
 })
 
 let users = []
 
 app.post("/userLogin", (req, res) => {
-    const { loginName } = req.body
-    users.push(req.body)
-    req.session.useData = users
-    res.redirect("/user")
-    console.log(users)
+    const { userCreate } = req.body
+    req.session.user = userCreate
+    const userFound = users.find(us => us.userCreate === userCreate)
+    if (userFound) {
+        console.log("El usuario ya existe")
+        res.redirect("/")
+    } else {
+        users.push(req.body)
+        req.session.user = req.body
+        res.redirect("/")
+        console.log("El usuario se a creado")
+    }
 })
 io.on("connection", async socket => {
     console.log("conection realizada")

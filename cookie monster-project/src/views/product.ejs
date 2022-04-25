@@ -18,14 +18,14 @@
     <script src="https://unpkg.com/ejs@3.1.6/ejs.min.js"></script>
     <script>
         const socket = io()
-        let form = document.getElementById("formis");
-        form.addEventListener("submit", (e) => {
+        let formP = document.getElementById("formis");
+        formP.addEventListener("submit", (e) => {
             e.preventDefault();
-            let data = new FormData(form);
+            let data = new FormData(formP);
             let sendObj = {};
             data.forEach((val, key) => (sendObj[key] = val))
             socket.emit("sendProducts", sendObj)
-            form.reset();
+            formP.reset();
         });
 
         socket.on("productLog", (data) => {

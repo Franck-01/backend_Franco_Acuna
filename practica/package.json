@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Franck-01/backend_Franco_Acuna/issues"
   },
-  "homepage": "https://github.com/Franck-01/backend_Franco_Acuna#readme"
+  "homepage": "https://github.com/Franck-01/backend_Franco_Acuna#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.0",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.3.1",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0"
+  }
 }

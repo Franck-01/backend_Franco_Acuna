@@ -1,0 +1,103 @@
+<div class="formulate">
+    <h1>Welcome to the ship factory</h1>
+    <form id="formis">
+        <label>Name:</label>
+        <input type="text" name="name">
+        <label>Model:</label>
+        <input type="text" name="model">
+        <label>Faction:</label>
+        <input type="text" name="faction">
+        <label>Imagen en URL:</label>
+        <input name="img">
+        <input type="submit" value="Enviar">
+    </form>
+</div>
+<ul id="views"></ul>
+<%- include("./history/p_history",{files:files}) %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/ejs@3.1.6/ejs.min.js"></script>
+    <script>
+        const socket = io()
+        let formP = document.getElementById("formis");
+        formP.addEventListener("submit", (e) => {
+            e.preventDefault();
+            let data = new FormData(formP);
+            let sendObj = {};
+            data.forEach((val, key) => (sendObj[key] = val))
+            socket.emit("sendProducts", sendObj)
+            formP.reset();
+        });
+
+        socket.on("productLog", (data) => {
+            let products = data.payload
+            let productsViews = document.getElementById("views");
+            fetch("history/p_history.ejs").then((response) => {
+                return response.text();
+            }).then(template => {
+                const processe = ejs.compile(template);
+                const html = processe({
+                    products
+                })
+                productsViews.innerHTML = html
+            })
+        })
+    </script>
+    <style>
+        html {
+            background-repeat: no-repeat;
+            background-image: url("https://img5.goodfon.com/wallpaper/nbig/1/77/star-wars-mandalorian-yoda-baby-yoda-2020.jpg");
+            background-position: center top;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100%;
+        }
+        
+        .swal2 {
+            color: white;
+        }
+        
+        .swal2-html-container {
+            display: flex !important;
+            align-items: center !important;
+            flex-direction: column !important;
+        }
+        
+        .swal2-input {
+            width: 80% !important;
+            margin: .3em 0 1em !important;
+        }
+        
+        .chatMessage {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .email {
+            font-weight: bold;
+            color: rgb(37, 37, 134);
+        }
+        
+        .time {
+            color: rgb(151, 40, 40);
+            order: 2;
+            margin-left: auto;
+        }
+        
+        .message {
+            color: #008800;
+            font-style: italic;
+        }
+        
+        .formulate {
+            color: white;
+        }
+        
+        .formulate input {
+            background: rgb(255, 255, 255);
+            background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 100%);
+            color: white;
+            padding: 1%;
+            margin-left: 4%;
+            margin-right: 4%;
+        }
+    </style>

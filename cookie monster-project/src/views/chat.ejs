@@ -1,0 +1,44 @@
+<div id="chatContainer">
+    <input type="text" id="chatInput" placeholder="chat">
+    <p id="ChatLog"></p>
+</div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./socket.io/socket.io.js"></script>
+<script>
+    const socket = io()
+    let user
+    const input = document.getElementById('chatInput')
+    const chatLog = document.getElementById('chatLog')
+
+    const userLoged = {
+        author: {}
+    }
+
+    input.addEventListener('keyup', (e) => {
+        if (e.key === "Enter") {
+            socket.emit('message', {
+                user: user,
+                message: input.value.trim(),
+            })
+            userLoged.text = input.value.trim()
+            socket.emit('userInfo', userLoged)
+            input.value = "";
+        }
+    })
+
+    socket.on('ChatLog', data => {
+        console.log(data)
+        const chatLog = document.getElementById('ChatLog');
+        let messages = "";
+        data.forEach(message => {
+            messages += `
+                    <div class="chatMessage">
+                        <p class="email">${message.author.id}:</p>
+                        <p class="time">${message.time}</p>
+                        <p class="message">${message.text}</p>
+                    </div>
+                    `
+        });
+        chatLog.innerHTML = messages;
+    })
+</script>

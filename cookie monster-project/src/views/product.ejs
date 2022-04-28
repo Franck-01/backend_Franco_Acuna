@@ -9,7 +9,7 @@
         <input type="text" name="faction">
         <label>Imagen en URL:</label>
         <input name="img">
-        <input type="submit" value="Enviar">
+        <input type="submitt" value="Enviar">
     </form>
 </div>
 <ul id="views"></ul>
@@ -19,7 +19,7 @@
     <script>
         const socket = io()
         let formP = document.getElementById("formis");
-        formP.addEventListener("submit", (e) => {
+        formP.addEventListener("submitt", (e) => {
             e.preventDefault();
             let data = new FormData(formP);
             let sendObj = {};

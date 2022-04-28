@@ -1,53 +1,43 @@
+<!DOCTYPE html>
+<br lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 <div>
     <h2>Bienvenido</h2>
-    <form class="formuser" enctype="multipart/form-data">
-        <label for="loginName">Cual es tu nombre?:</label>
-        <input name="nameuser" id="loginName" class="swal2-input">
+    <form action="/signupForm" method="post" class="formuser">
+        <label>Nombre</label>
+        <input type="text" name="name" class="swal2-input">
+        <label>Usuario:</label>
+        <input type="text" name="username" class="swal2-input">
         <label>Edad:</label>
-        <input name="age" id="age" class="swal2-input">
-        <label>nos faltaria un email:</label>
-        <input name="mail" id="mail" class="swal2-input">
-        <input type="submit" value="Iniciar Sesion" class="swal2-input">
+        <input type="text" name="age" class="swal2-input">
+        <label>Mail:</label>
+        <input type="text" name="mail" class="swal2-input">
+        <label>Contraseña:</label>
+        <input type="text" name="password" class="swal2-input">
+        <input type="submit" value="Registrarse" class="swal2-input">
     </form>
-    <p id="user"></p>
 </div>
+</body>
+
+</html>
+<p id="user"></p>
 <script src="https://unpkg.com/ejs@3.1.6/ejs.min.js"></script>
-<script>
-    let form = document.getElementById('formuser')
-    let username = document.getElementById('loginName')
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        let formData = new FormData(e.target)
-
-        fetch('/login', {
-            method: 'POST',
-            body: formData
-        })
-
-        form.reset()
-
-        setTimeout(() => {
-            location.reload()
-        }, 500)
-    }
-    if (form) {
-        form.addEventListener('submit', (e) => handleSubmit(e))
-    }
-
-    let user = username
-    fetch("/login").then(us => us.json()).then(data => user = data.user)
-    let userTemplate = document.getElementById("user")
-    fetch("history/u_history.ejs").then(us => {
-        return us.text()
-    }).then(temp => {
-        const html = ejs.render(temp, {
-            user: user
-        })
-        userTemplate.innerHTML = html
-    })
-</script>
 <style>
+    html {
+        background-repeat: no-repeat;
+        background-image: url("https://csn.naekranie.pl/wp-content/uploads/2020/04/sw_5e9d7de500b85.jpeg");
+        background-position: center top;
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100%;
+    }
+    
     .formuser {
         text-align: center;
         margin-left: 20%;

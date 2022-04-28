@@ -1,5 +1,16 @@
-<% if (user) { %>
-    <h1>Hola
-        <%= user %>
-    </h1>
-    <% } %>
+<% if (user.length>0) { %>
+    <% user.forEach(create => { %>
+        <div>
+            <p>
+                <%= create.nameuser %>
+            </p>
+            <p>
+                <%= create.age %>
+            </p>
+            <p>
+                <%= create.mail %>
+            </p>
+        </div>
+        <% } %>
+            <%} else{%>
+                <p>Information: error</p>

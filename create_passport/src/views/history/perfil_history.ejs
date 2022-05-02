@@ -1,0 +1,11 @@
+<% if (perfil.length>0) { %>
+    <% perfil.forEach(forms => { %>
+        <div>
+            <p>
+                <%=forms.username  %>
+            </p>
+        </div>
+        <% }) %>
+            <% } else { %>
+                <p>informacion no encontrada</p>
+                <% } %>

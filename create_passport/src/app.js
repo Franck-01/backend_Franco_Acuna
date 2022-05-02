@@ -138,7 +138,7 @@ app.post("/productsArray", (req, res) => {
 app.post("/signupForm", passport.authenticate('signup', {
     failureRedirect: '/signup',
 }), (req, res) => {
-    res.render("perfil.ejs")
+    res.redirect("/")
 })
 app.post("/loginForm", passport.authenticate("login", {
     failureRedirect: "/login",

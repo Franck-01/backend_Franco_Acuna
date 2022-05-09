@@ -1,0 +1,13 @@
+<div>
+    <%if(command){%>
+        <%command.forEach(info =>{%>
+            <div>
+                <ul>
+                    <li>
+                        <%=info.name %>
+                    </li>
+                </ul>
+            </div>
+</div>
+<button><a href="/logout">Cerrar Session</a></button>
+<script src="https://unpkg.com/ejs@3.1.6/ejs.min.js"></script>

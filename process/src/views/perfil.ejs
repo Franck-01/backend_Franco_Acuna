@@ -1,0 +1,16 @@
+<div>
+    <%if(userInfo){%>
+        <%userInfo.forEach(info =>{%>
+            <div>
+                <p>
+                    Bienvenido:
+                    <%=info.username %>
+                </p>
+            </div>
+            <% }) %>
+                <%}else{ %>
+                    <p>Por ahora no hay usurio</p>
+                    <% } %>
+</div>
+<button><a href="/logout">Cerrar Session</a></button>
+<script src="https://unpkg.com/ejs@3.1.6/ejs.min.js"></script>

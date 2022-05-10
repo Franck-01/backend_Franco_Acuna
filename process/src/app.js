@@ -5,22 +5,23 @@ const mongoose = require("mongoose")
 const MongoStore = require("connect-mongo")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
+const handlebars = require("express-handlebars")
 const { fork } = require("child_process")
 const {} = require("dotenv/config")
-const { Server } = require("socket.io")
-const productsManager = require("./Managers/productsManagers")
-const files = require("./files/products.json")
 const User = require("./models/User.js")
 
-const servicesData = new productsManager()
 const app = express()
-const PORT = process.env.PORT || 8080
-const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`))
-const io = new Server(server)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+const PORT = process.env.PORT || 8000
+const server = app.listen(PORT, () => console.log(`Listening on ${PORT}`))
+
+app.engine("handlebars", handlebars.engine())
+app.set("views", __dirname + "/views")
+app.set("view engine", "handlebars")
 
 const URL = "mongodb+srv://Franck01:comandante0-1@backendcluster5701.afwv7.mongodb.net/process?retryWrites=true&w=majority"
+
 mongoose.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -53,7 +54,7 @@ passport.deserializeUser((id, done) => {
 const createHash = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
 }
-passport.use('signup.ejs', new LocalStrategy({
+passport.use('signup', new LocalStrategy({
     passReqToCallback: true
 }, (req, username, password, done) => {
     User.findOne({ username: username }, (err, user) => {
@@ -70,7 +71,7 @@ passport.use('signup.ejs', new LocalStrategy({
         })
     })
 }))
-passport.use("login.ejs", new LocalStrategy({
+passport.use("login", new LocalStrategy({
     passReqToCallback: true,
 }, (req, username, password, done) => {
     User.findOne({ username: username, }, (err, user) => {
@@ -87,13 +88,9 @@ const isAuth = (req, res, next) => {
     if (req.session.isAuth) {
         next();
     } else {
-        res.redirect("/login.ejs");
+        res.redirect("/login");
     }
 }
-app.set("views", __dirname + "/views")
-app.set("files", __dirname + "/files")
-app.set("view engine", "ejs")
-
 let command = [{
     name: process.platform
 }, {
@@ -107,48 +104,34 @@ let command = [{
 }, {
     name: process.title
 }]
-
-let userInfo = []
 app.get("/", (req, res) => {
-    res.render("index.ejs", {
-        userInfo,
-        files
+    res.render("home", {
+        userInfo: req.session.user
     })
 })
 app.get("/login", (req, res) => {
-    res.render("login.ejs")
+    res.render("login")
 })
 app.get("/signup", (req, res) => {
-    res.render("signup.ejs")
+    res.render("signup")
 })
 app.get("/missingpermission", (req, res) => {
-    res.render("missingpermission.ejs")
+    res.render("missingpermission")
 })
 app.get("/perfil", isAuth, (req, res) => {
-    res.render("perfil.ejs", {
-        userInfo
-    })
+    res.render("perfil")
 })
 app.get('/info', (req, res) => {
-    res.render('info.ejs', {
-        command
+    res.render('info', {
+        command: command
     })
 })
-app.get("/products", (req, res) => {
-    res.render("products.ejs", {
-        files
-    })
-})
-app.post("/prodForm", (req, res) => {
-    files.push(req.body)
-    res.redirect("/")
-})
-app.post("/signupForm", passport.authenticate('signup.ejs', {
+app.post("/signupForm", passport.authenticate('signup', {
     failureRedirect: '/signup',
 }), (req, res) => {
     res.redirect("/")
 })
-app.post("/loginForm", passport.authenticate("login.ejs", {
+app.post("/loginForm", passport.authenticate("login", {
     failureRedirect: "/login",
 }), async(req, res) => {
     req.session.isAuth = true

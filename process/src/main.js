@@ -8,12 +8,10 @@ const randomNumber = (number) => {
             } else {
                 obj[random] = 1
             }
-            // obj[random] = obj.hasOwnProperty(random) ? obj[random] + 1 : obj[random] = 1
         }
     }
     return obj
 }
-
 process.on('message', msg => {
     if (!isNaN(msg)) {
         const result = randomNumber(msg)

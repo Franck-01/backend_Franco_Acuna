@@ -1,0 +1,17 @@
+<h1>Bienvenido</h1>
+{{#if userInfo}}
+    <p>Bienvenido {{userInfo.username}}!!</p>
+    <form action="/logout" method="post">
+        <button>Cerrar Sesion</button>
+    </form>
+{{/if}}
+<br><br>
+<a href="/login">Iniciar Sesion</a>
+<br>
+<a href="/signup">Registrarse</a>
+{{#if userInfo}}
+    <br>
+    <a href="/perfil">Ir al Perfil</a>
+{{/if}}
+
+<h2>Proximamente: mas contenido</h2>

@@ -1,0 +1,4 @@
+127.0.0.1 - - [10/May/2022:10:41:46 -0300] "GET / HTTP/1.1" 200 615 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+127.0.0.1 - - [10/May/2022:10:47:54 -0300] "GET / HTTP/1.1" 200 757 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+127.0.0.1 - - [10/May/2022:11:10:44 -0300] "GET / HTTP/1.1" 200 799 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+127.0.0.1 - - [10/May/2022:11:10:44 -0300] "GET /js/index.js HTTP/1.1" 200 33 "http://localhost/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"

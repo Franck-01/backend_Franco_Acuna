@@ -1,0 +1,41 @@
+DESDE NODE:
+-ejecutar en modo fork
+    pm2 start src/app.js --name"server0" --watch -- -p 8080 --modo fork (si no se especifica ejecuta por defecto en modo fork)
+
+-ejectar en modo cluster
+    pm2 start src/app.js --name"server1" --watch -- -p 8081 --modo cluster
+
+DESDE PM2:
+-ejecutar en modo fork
+    igual que en NODE
+
+-ejecutar en modo cluster
+    pm2 start src/app.js --name="server4" --watch -i max -- -p 8081
+
+DESDE NGINX
+- /api/random con cluster desde NODE
+    CLI: pm2 start src/app.js --name"server1" --watch -- -p 8081 --modo cluster
+    NGINX CONF: 
+        location /api/random {
+            proxy_pass http://localhost:8081;
+        }
+
+- /api/random con cluster gestionado en NGINX
+    levantar servidores desde NODE en modo fork
+    CLI: pm2 start src/app.js --name="server1" --watch -- -p 8082
+    CLI: pm2 start src/app.js --name="server2" --watch -- -p 8083
+    CLI: pm2 start src/app.js --name="server3" --watch -- -p 8084
+    CLI: pm2 start src/app.js --name="server4" --watch -- -p 8085
+    
+    NGINX CONF: 
+        upstream ClusterNginx {
+        server 127.0.0.1:8082;
+        server 127.0.0.1:8083;
+        server 127.0.0.1:8084;
+        server 127.0.0.1:8085;
+        }
+
+        location /api/random {
+            proxy_pass http://ClusterNginx;
+        }
+

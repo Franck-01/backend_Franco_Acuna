@@ -1,0 +1,5 @@
+[2022-05-24T10:58:57.934] [WARN] archivo - Logger warn
+[2022-05-24T10:58:57.937] [ERROR] archivo - Logger error
+[2022-05-24T10:58:57.937] [FATAL] archivo - Logger fatal
+[2022-05-24T10:59:20.345] [ERROR] all - Logger error
+[2022-05-24T10:59:20.353] [FATAL] all - Logger fatal

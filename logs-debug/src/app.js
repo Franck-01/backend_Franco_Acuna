@@ -14,6 +14,7 @@ const compression = require("compression")
 const log4js = require("log4js")
 const ejs = require("ejs")
 const User = require("./models/usersSchema.js")
+const crypto = require("crypto")
 
 log4js.configure({
     appenders: {
@@ -40,8 +41,6 @@ const args = minimist(process.argv.slice(2), options)
 
 const app = express()
 const PORT = args.port || 8080
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 switch (args.modo) {
     case "fork":
@@ -64,9 +63,14 @@ switch (args.modo) {
     default:
         break
 }
-
+/*
 app.set("views", __dirname + "/views")
 app.set("view engine", "ejs")
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+app.use(compression())
 
 app.use(session({
     secret: process.env.SECRET,
@@ -140,88 +144,147 @@ mongoose.connect(URL, {
         logError.error(error)
         logConsole.error(error)
     }
-})
+})*/
+const users = {}
 app.get('/', (req, res) => {
-    res.render("index.ejs", {
-        prueba: 0
+        res.json({ users })
+            /*res.render("index.ejs", {
+                prueba: 0
+            })
+            logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)*/
     })
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-app.get("/login", (req, res) => {
-    if (req.isAuthenticated()) return res.redirect("/profile")
-    res.render("login.ejs")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    /*app.get("/login", (req, res) => {
+        if (req.isAuthenticated()) return res.redirect("/profile")
+        res.render("login.ejs")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
 
-})
-app.get("/signup", (req, res) => {
-    if (req.isAuthenticated()) return res.redirect("/profile")
-    res.render("signup.ejs")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-app.get("/logout", isUserLogged, (req, res) => {
-    if (req.isAuthenticated()) {
-        req.logOut()
-        res.render("logout.ejs")
-    }
-    res.redirect("/")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-app.get("/profile", isUserLogged, (req, res) => {
-    res.render("profile.ejs", { user: req.session.passport.user.username })
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-app.get("/userExists", (req, res) => {
-    res.render("userExists.ejs")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-app.get("/invalidPass", (req, res) => {
-    res.render("invalidPass.ejs")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-
-app.post("/signupForm", passport.authenticate('signup', {
-    failureRedirect: '/userExists',
-}), (req, res) => {
-    res.redirect("/profile")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-app.post("/loginForm", passport.authenticate("login", {
-    failureRedirect: "/invalidPass",
-}), (req, res) => {
-    res.redirect("/profile")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
-app.post("/logout", (req, res) => {
-    req.session.destroy((err) => {
-        if (err) {
-            return res.send({
-                error: error,
-            });
-        } else {
-            res.redirect("/")
-            logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+    app.get("/signup", (req, res) => {
+        if (req.isAuthenticated()) return res.redirect("/profile")
+        res.render("signup.ejs")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+    app.get("/logout", isUserLogged, (req, res) => {
+        if (req.isAuthenticated()) {
+            req.logOut()
+            res.render("logout.ejs")
         }
-    });
-    res.redirect("/")
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
+        res.redirect("/")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+    app.get("/profile", isUserLogged, (req, res) => {
+        res.render("profile.ejs", { user: req.session.passport.user.username })
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+    app.get("/userExists", (req, res) => {
+        res.render("userExists.ejs")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+    app.get("/invalidPass", (req, res) => {
+        res.render("invalidPass.ejs")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
 
-app.get("/info", (req, res) => {
-    const info = {
-        argv: args,
-        platform: process.platform,
-        version: process.version,
-        rss: process.memoryUsage,
-        path: process.execPath,
-        pid: process.pid,
-        folder: process.env.PWD,
-        CPUs: num_CPU
-    }
-    res.send(info)
-    logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
-})
+    app.post("/signupForm", passport.authenticate('signup', {
+        failureRedirect: '/userExists',
+    }), (req, res) => {
+        res.redirect("/profile")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+    app.post("/loginForm", passport.authenticate("login", {
+        failureRedirect: "/invalidPass",
+    }), (req, res) => {
+        res.redirect("/profile")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+    app.post("/logout", (req, res) => {
+        req.session.destroy((err) => {
+            if (err) {
+                return res.send({
+                    error: error,
+                });
+            } else {
+                res.redirect("/")
+                logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+            }
+        });
+        res.redirect("/")
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
+
+    app.get("/info", (req, res) => {
+        const info = {
+            argv: args,
+            platform: process.platform,
+            version: process.version,
+            rss: process.memoryUsage,
+            path: process.execPath,
+            pid: process.pid,
+            folder: process.env.PWD,
+            CPUs: num_CPU
+        }
+        res.send(info)
+        logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+    })
 
 app.get('*', (req, res) => {
     logConsole.warn(`${req.method} to ${req.get('host')}${req.originalUrl}`)
     logWarn.warn(`${req.method} to ${req.get('host')}${req.originalUrl}`)
+})*/
+
+app.get("/newUser", (req, res) => {
+    let userName = req.query.userName || "";
+    let password = req.query.password || "";
+
+    userName = userName.replace(/[!@#$%&*]/g, "")
+
+    if (!userName || !password || users[userName]) {
+        return res.sendStatus(400)
+    }
+
+    const salt = crypto.randomBytes(120).toString("base64")
+    const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, "sha512")
+
+    users[userName] = { salt, hash }
+    res.sendStatus(200)
+})
+
+app.get("/bloq", (req, res) => {
+    let userName = req.query.userName || ""
+    const password = req.query.password || ""
+
+    userName = userName.replace(/[!@#$%&*]/g, "")
+
+    if (!userName || !password || users[userName]) {
+        process.exit(1)
+    }
+
+    const { salt, hash } = users[userName]
+    const encryHash = crypto.pbkdf2Sync(password, salt, 10000, 512, "sha512")
+
+    if (crypto.tiningSafeEqual(hash, encryHash)) {
+        res.sendStatus(200)
+    } else {
+        process.exit(1)
+    }
+})
+
+app.get("/no-bloq", (req, res) => {
+    let userName = req.query.userName || ""
+    const password = req.query.password || ""
+
+    userName = userName.replace(/[!@#$%&*]/g, "")
+
+    if (!userName || !password || users[userName]) {
+        process.exit(1)
+    }
+
+    const { salt } = users[userName]
+    crypto.pbkdf2(password, salt, 10000, 512, "sha512", (err, hash) => {
+        if (users[userName].hash.toString() === hash.toString()) {
+            res.sendStatus(200)
+        } else {
+            process.exit(1)
+        }
+    })
 })

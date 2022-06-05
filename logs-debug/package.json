@@ -4,13 +4,14 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon src/app.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "0x src/app.js",
+        "test": "node src/command.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "autocannon": "^7.9.0",
         "bash": "^0.0.1",
         "bcrypt": "^5.0.1",
         "compression": "^1.7.4",

@@ -4,8 +4,8 @@ const twilio = require("twilio");
 const app = express();
 
 // credenciales
-const accountId = "ACcd27ef502fd73b5aa2c3778372c50955";
-const authToken = "46e9f13f7c0706843b01ae208ac6872d";
+const accountId = "ACbccf62f6f1fa9a6907d243365f2270d9";
+const authToken = "5b3df0f6dbb9bbfd3c22cb7f7d6f9c47";
 
 const client = twilio(accountId, authToken);
 
@@ -14,8 +14,8 @@ app.post("/twilio-coder", async(req, res) => {
         const message = await client.messages.create({
             // cuerpo del mensaje
             body: "Hola soy uyn SMS desde nodeJS",
-            from: "+19206956800",
-            to: "+5491153267449",
+            from: "+19785888948",
+            to: "+5491121899785",
         });
 
         console.log(message);

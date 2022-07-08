@@ -1,0 +1,7 @@
+[2022-07-08T17:24:42.761] [WARN] file - GET to localhost:8000/main
+[2022-07-08T17:26:44.948] [WARN] file - GET to localhost:8000/main
+[2022-07-08T17:26:55.279] [WARN] file - GET to localhost:8000/main
+[2022-07-08T18:22:42.821] [WARN] file - GET to localhost:8000/stylesheets/style.css
+[2022-07-08T18:25:22.708] [WARN] file - GET to localhost:8000/stylesheets/style.css
+[2022-07-08T18:26:42.588] [WARN] file - GET to localhost:8000/stylesheets/style.css
+[2022-07-08T18:28:11.743] [WARN] file - GET to localhost:8000/stylesheets/style.css

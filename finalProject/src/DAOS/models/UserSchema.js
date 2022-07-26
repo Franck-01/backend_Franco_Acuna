@@ -6,8 +6,8 @@ const userShema = new mongoose.Schema({
   mail: { type: String },
   phone: { type: Number },
   age: { type: Number },
-  file: {type: String},
   cart: { type: Object },
+  file: {type: String},
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   isAdmin: {type: String}

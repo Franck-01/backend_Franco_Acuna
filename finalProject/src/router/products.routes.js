@@ -7,33 +7,39 @@ const isUserLogged = (req, res, next) => {
   res.redirect('/product')
 }
 const router = express.Router()
-
-const productServices = new productDAO()
-
 const AdminService = new admin()
 
-const middleWare = (req, res, next) => {
-  AdminService ? next() : res.send({status: 'error',message: 'only available as admin'})
+let idAdmin = true
+
+const AdminS = (req, res, next) => {
+  AdminService.admin(idAdmin).then(result => {
+    if (result) {
+      next()
+    } else {
+      res.status(404).send({error: -1,description: 'the route is not authorized', message: 'you are not logged in as admin'})
+    }
+  })
 }
+
 router.get('/', isUserLogged, (req, res) => {
-  productServices.Read().then(x => res.render('createproduct.ejs', {data: x.payload,user: req.session.passport.user}))
+  productDAO.Read().then(products => res.render('createproduct.ejs', {products: products}))
 })
-router.post('/', middleWare, (req, res) => {
+router.post('/', AdminS, (req, res) => {
   let body = req.body
-  productServices.Create(body).then((result) => res.send(result))
+  productDAO.Create(body).then((result) => res.send(result))
 })
 router.get('/:id', (req, res) => {
   let id = parseInt(req.params.id)
-  productServices.ReadId(id).then((result) => res.send(result))
+  productDAO.ReadId(id).then((result) => res.send(result))
 })
-router.put('/:id', middleWare, (req, res) => {
+router.put('/:id', AdminS, (req, res) => {
   let id = req.params.id
   let product = req.body
-  productServices.Update(id, product).then((result) => res.send(result))
+  productDAO.Update(id, product).then((result) => res.send(result))
 })
-router.delete('/:id', middleWare, (req, res) => {
+router.delete('/:id', AdminS, (req, res) => {
   let id = req.params.id
-  productServices.Delete(id).then((result) => res.send(result))
+  productDAO.Delete(id).then((result) => res.send(result))
 })
 
 const productRouter = router

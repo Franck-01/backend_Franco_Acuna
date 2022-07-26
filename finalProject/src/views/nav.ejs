@@ -1,0 +1,15 @@
+<div>
+    <div id="img"></div>
+    <div id="name"></div>
+    <a href="/logout">logout</a>
+</div><hr>
+
+<% if (isAdmin = 'false') { %>
+    <div>
+        <p>Admin</p>
+        <p>Add products</p>
+        <form id="addForm">
+            <input type="text">
+        </form>
+    </div><hr>
+<% } %>

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose")
 const productService = require("../models/ProductsSchema.js")
-const mongoConfig = require("../mongo_config.js")
 const dotenv = require("dotenv")
 
 dotenv.config()
@@ -12,7 +11,7 @@ mongoose.connect("mongodb+srv://Franck01:comandante0-1@backendcluster5701.afwv7.
   useUnifiedTopology: true
 }, err => {
   if (err) return ('Unable to Connect')
-  logConsole.info('Connect to DB')
+  logConsole.info("database = Connected products")
 })
 
 const productServices = new productService()

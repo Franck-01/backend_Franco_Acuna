@@ -3,14 +3,13 @@ const passport = require('passport')
 const log4js = require('log4js')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../DAOS/models/UserSchema')
+const {userDAO} = require("../DAOS/index.js")
 
 passport.serializeUser((user, done) => {
-  return done(null, user.id)
-})
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    return done(err, user)
-  })
+  return done(null, user)})
+passport.deserializeUser(async(id, done) => {
+  let result = await userDAO.getById({_id:id})
+    done(null,result)
 })
 const createHash = (password) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10))
@@ -19,42 +18,45 @@ const isAuth = (req, res, next) => {
   if (req.isAuthenticated()) return next()
   res.redirect('/profile')
 }
-passport.use('signup', new LocalStrategy({
-  passReqToCallback: true
-}, (req, username, password, done) => {
-  User.findOne({ username: username }, (err, userFound) => {
-    if (err) return done(err)
-    if (!userFound) return done(null, false, {
-        message: 'user already exist'
+const configuratePass = () => {
+  passport.use('signupS', new LocalStrategy(
+    {passReqToCallback: true},
+    (req, username, password, done) => {
+      User.findOne({ username: username }, (err, userCreated) => {
+        if (!req.file) return done(null, false, {
+          message: 'couldnt upload avatar'
+        })
+        if (err) return done(err)
+        if (userCreated) return done(null, false, {
+            message: 'user already register'
+          })
+        const newUser = {
+          name: req.body.name,
+          mail: req.body.mail,
+          phone: req.body.phone,
+          age: req.body.age,
+          file: req.file.filename || 'no file',
+          username: username,
+          password: createHash(password),
+          isAdmin: req.body.isAdmin || false
+        }
+        User.create(newUser, (err, userCreated) => {
+          if (err) return done(err)
+          return done(null, userCreated)
+        })
       })
-    const newUser = {
-      name: req.body.name,
-      username: username,
-      password: createHash(password)
+    }))
+  passport.use('loginS', new LocalStrategy(
+    (username, password, done) => {
+      User.findOne({ username: username }, (err, userFound) => {
+        if (err) return done(err)
+        if (!userFound) return done(null, false, {message: 'user dont exist'})
+        if (!bcrypt.compareSync(password, userFound.password)) return done(null, false, {message: 'invalid password'})
+        return done(null, userFound)
+      })
     }
-    User.create(newUser, (err, userFound) => {
-      if (err) return done(err)
-      return done(null, userFound)
-    })
-  })
-}))
-passport.use('login', new LocalStrategy({
-  passReqToCallback: true
-}, (req, username, password, done) => {
-  User.findOne({ username: username }, (err, userCreated) => {
-    if (err) return done(err)
-    if (userCreated) return done(null, false, { message: 'Este usuario ya existe' })
-    const newUser = {
-      username: username,
-      password: createHash(password),
-      name: req.body.name
-    }
-    User.create(newUser, (err, userCreated) => {
-      if (err) return done(err)
-      return done(null, userCreated)
-    })
-  })
-}))
+  ))
+}
 
 log4js.configure({
   appenders: {
@@ -73,4 +75,4 @@ let logConsole = log4js.getLogger()
 let logWarn = log4js.getLogger('file')
 let logError = log4js.getLogger('file2')
 
-module.exports = { isAuth, logConsole, logWarn, logError}
+module.exports = { isAuth, logConsole, logWarn, logError, configuratePass}

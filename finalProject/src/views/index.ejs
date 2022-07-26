@@ -5,31 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/style.css">
     <title>final</title>
 </head>
 
 <body>
-    <nav>
-        <p>Hello
-            <%= user %>
-        </p>
-        <div id="img"></div>
-        <div id="name"></div>
-        <a href="/logout">Log Out</a>
-    </nav>
     <hr>
-    
-    <% if (user.isAdmin = 'false') { %>
-        <div>
-            <p>Admin</p>
-            <p>Add products</p>
-            <form id="addForm">
-                <input type="text">
-            </form>
-        </div><hr>
-    <% } %>
-
+    <div>
+        <h1>home view</h1>
+        <% if (prueba) { %>
+            <p><%= prueba %> </p>
+        <% } %>
+        <nav>
+            <%- include('./nav'); %>
+        </nav>
+    </div>
     <div>
         <a href="/">
             <div>
@@ -42,21 +31,7 @@
         <a href="/signup">Sign Up</a>
     </div>
 
-    <div>
-        <h1>home view</h1>
-        <% if (prueba) { %>
-            <p>
-                <%= prueba %>
-            </p>
-            <% } %>
-    </div>
-    <div id="productContainer"></div><hr>
-    <h1>carrito</h1>
-    <div id="cartContainer"></div>
-
-    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.6/ejs.min.js"></script>
-    <script src="../public/js/home.js"></script>
 </body>
 
 </html>

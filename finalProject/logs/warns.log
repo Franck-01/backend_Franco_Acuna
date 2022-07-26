@@ -172,3 +172,12 @@
 [2022-07-26T12:02:55.154] [WARN] file - GET to localhost:8030/favicon.ico
 [2022-07-26T12:03:18.951] [WARN] file - GET to localhost:8030/favicon.ico
 [2022-07-26T12:03:20.513] [WARN] file - GET to localhost:8030/userExists
+[2022-07-26T12:09:09.877] [WARN] file - GET to localhost:8030/favicon.ico
+[2022-07-26T12:10:22.266] [WARN] file - GET to localhost:8030/favicon.ico
+[2022-07-26T12:14:04.177] [WARN] file - GET to localhost:8030/favicon.ico
+[2022-07-26T12:32:38.540] [WARN] file - GET to localhost:8030/favicon.ico
+[2022-07-26T12:33:20.510] [WARN] file - GET to localhost:8030/favicon.ico
+[2022-07-26T12:34:08.223] [WARN] file - GET to localhost:8030/userExists
+[2022-07-26T12:34:25.110] [WARN] file - GET to localhost:8030/favicon.ico
+[2022-07-26T12:37:08.018] [WARN] file - GET to localhost:8030/favicon.ico
+[2022-07-26T12:37:34.737] [WARN] file - GET to localhost:8030/favicon.ico

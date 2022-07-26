@@ -7,10 +7,9 @@ const userShema = new mongoose.Schema({
   phone: { type: Number },
   age: { type: Number },
   cart: { type: Object },
-  file: {type: String},
+  file: { type: String },
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  isAdmin: {type: String}
+  password: { type: String, required: true }
 })
 const User = mongoose.model(userCollection, userShema)
 

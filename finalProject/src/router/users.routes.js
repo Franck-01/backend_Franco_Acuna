@@ -5,7 +5,7 @@ const { isAuth } = require('../services/users.services.js')
 const uploader = require('../services/uploader.js')
 const { getHome, getInvalidPassword, getLogin, getLogout, getProfile, getSignup, getUserExist, getWrong, postLogin, postSignup, getNav } = require('../controllers/users.controller.js')
 
-router.get('/', getHome)
+router.get('/', getHome, getNav)
 
 router.get('/signup', getSignup)
 
@@ -25,7 +25,7 @@ router.post('/signupForm', uploader.single('file'), passport.authenticate('signu
   failureRedirect: '/userExists'
 }), postSignup)
 
-router.post('/loginForm', passport.authenticate('loginS', {
+router.post('/loginForm', uploader.single('file'), passport.authenticate('loginS', {
   failureRedirect: '/invalidPass'
 }), postLogin)
 

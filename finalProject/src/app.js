@@ -5,7 +5,7 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const { router } = require('./router/users.routes.js')
 const { productRouter } = require('./router/products.routes.js')
-const { logConsole, logWarn, logError, configuratePass } = require('./services/users.services.js')
+const { logConsole, logWarn, logError } = require('./services/users.services.js')
 
 dotenv.config()
 
@@ -40,7 +40,7 @@ mongoose.connect(URL, {
   if (err) return ('Unable to Connect')
   logConsole.info('database = users Connected')
 })
-configuratePass()
+
 app.use(passport.initialize())
 app.use(passport.session())
 

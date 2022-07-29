@@ -3,7 +3,7 @@ const session = require('express-session')
 const dotenv = require('dotenv')
 const passport = require('passport')
 const mongoose = require('mongoose')
-const { router } = require('./router/users.routes.js')
+const { userRouter } = require('./router/users.routes.js')
 const { productRouter } = require('./router/products.routes.js')
 const { logConsole, logWarn, logError } = require('./services/users.services.js')
 
@@ -40,9 +40,8 @@ mongoose.connect(URL, {
   if (err) return ('Unable to Connect')
   logConsole.info('database = users Connected')
 })
-
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', router)
+app.use('/', userRouter)
 app.use('/product', productRouter)

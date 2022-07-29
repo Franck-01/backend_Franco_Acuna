@@ -1,11 +1,26 @@
 const MongoContainer = require('../managers/cartManager');
-const User = require('../models/user');
+const User = require("../models/UserSchema.js");
 
 class UserDao {
     userManager = new MongoContainer(User);
 
-    UploadById = async (array,user) => {
-        return await this.userManager.UploadById(array,user);
+    Create = async (users) => {
+        return await this.userManager.Create(users)
+    }
+    Read = async (array, users) => {
+        return await this.userManager.Read(array,users)
+    }
+    Upload = async (array,users) => {
+        return await this.userManager.Upload(array,users);
+    }
+    Delete = async (array,users) => {
+        return await this.userManager.Delete(array,users);
+    }
+    CreateProduct = async (array,users) => {
+        return await this.userManager.CreateProduct(array,users);
+    }
+    DeleteProduct = async (array,users) => {
+        return await this.userManager.DeleteProduct(array,users);
     }
 }
 module.exports = UserDao;

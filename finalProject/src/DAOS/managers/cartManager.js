@@ -2,6 +2,8 @@ const mongoose = require("mongoose")
 const cartService = require("../models/cartsSchema.js")
 const productM_Mongo = require("./productManager.js")
 const dotenv = require("dotenv")
+const {logConsole} = require("../../services/users.services.js")
+
 
 dotenv.config()
 
@@ -71,7 +73,8 @@ class cartM_Mongo {
                 _id: 1,
                 name: 0,
                     model: 0,
-                    category: 0,
+                bando: 0,
+                    descrption:0,
                     url: 0,
                     price: 0,
                     stock: 0

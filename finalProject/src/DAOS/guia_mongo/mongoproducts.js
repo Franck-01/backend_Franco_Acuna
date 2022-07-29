@@ -4,20 +4,20 @@ const Product = require('../models/ProductsSchema.js');
 class MongoProductDao {
     productManager = new MongoContainer(Product);
 
-    getAll = async () => {
-        return await this.productManager.getAll();
+    Read = async () => {
+        return await this.productManager.Read();
     }
-    add = async (body) => {
-        return await this.productManager.add(body);
+    Create = async (body) => {
+        return await this.productManager.Create(body);
     }
-    delete = async (id)=>{
-        return await this.productManager.delete(id);
+    Delete = async (id)=>{
+        return await this.productManager.Delete(id);
     }
-    getById = async (id) => {
-        return await this.productManager.getById(id);
+    ReadId = async (id) => {
+        return await this.productManager.ReadId(id);
     }
-    UploadById = async (id,body) => {
-        return await this.productManager.UploadById(id,body);
+    Update = async (id,body) => {
+        return await this.productManager.Update(id,body);
     }
 }
 module.exports = MongoProductDao;

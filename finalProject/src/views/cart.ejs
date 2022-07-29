@@ -1,6 +1,7 @@
- <h1>Tu Carrito</h1>
-<div>
-    <table>
+<%- include('./history/head') %> 
+<h1>Your Cart</h1>
+<div class="container sm-6">
+    <table class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -20,7 +21,7 @@
             </tbody>
         <% }) %> 
      </table>
-        <form action = "/vaciar" method = "get">
-            <button type="submit" class="btn btn-dark">Vaciar Carrito o volver a productos</button>
+        <form action = "/clear" method = "get">
+            <button type="submit" class="btn btn-dark">Clear Cart</button>
         <form>
     </div>

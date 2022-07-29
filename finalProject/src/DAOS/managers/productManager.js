@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
-const productService = require("../models/ProductsSchema.js")
+const { productService } = require("../models/ProductsSchema.js")
+const {logConsole} = require("../../services/users.services.js")
 const dotenv = require("dotenv")
 
 dotenv.config()
@@ -14,18 +15,24 @@ mongoose.connect("mongodb+srv://Franck01:comandante0-1@backendcluster5701.afwv7.
   logConsole.info("database = Connected products")
 })
 
-const productServices = new productService()
-
 class ProductM_Mongo {
     Create = async(product) => {
-        if (!product.name || !product.model || !product.category || !product.url || !product.price || !product.stock ) return { status: 'error', error: 'Missing property' }
-        await productServices.find({ name: product.name })
-        if(exist.length !=0) return {status:"error",message:"Product Already Created"}
-        await productServices.insertMany(product)
-        return { status: "success", message: "Product Created" }
+        if (!product.name || !product.model || !product.bando || !product.description || !product.url || !product.price || !product.stock) {
+            let exist = await productService.find({name:product.name})
+        if(exist.length != 0) return {status:'error',message:'product already added'}
+            return { status: 'error', error: 'Missing property', exist:exist }
+        } else { 
+            try {
+              await productService.create(product)
+            return { status: "success", message: "Product Created" }  
+            } catch {
+                await productService.insertMany([product])
+            return {status:'succes',message:'product added'}
+            }
+        } 
     }
     Read = async() => {
-        let product = await productServices.find({}, {
+        let product = await productService.find({}, {
             name: 1,
             product: 1,
             _id: 0
@@ -38,36 +45,38 @@ class ProductM_Mongo {
             let result = await productService.find({
                 _id:id
             })
+            return {status:'succes',payload:result}
         } catch (error) {
             return {status:"error", error:"ID not found"}
         }
     }
-    Update = async (_id, p_body) => {
+    Update = async (id, product) => {
         if (!id) return { status: "error", error: "Id nedded" }
-        if (!product.name || !product.model || !product.category || !product.url || !product.price || !product.stock ) return{status:"error", message:"data missing"}
+        if (!product.name || !product.model || !product.bando || !product.description || !product.url || !product.price || !product.stock ) return{status:"error", message:"data missing"}
         try {
-            let result= await productServices.updateOne({
-                id: _id
+            let result= await productService.update({
+                _id: id
             }, {
                 $set: {
-                    name: p_body.name,
-                    model: p_body.model,
-                    category: p_body.category,
-                    url: p_body.url,
-                    price: p_body.price,
-                    stock: p_body.stock
+                    name: product.name,
+                    model: product.model,
+                    bando: product.bando,
+                    description: product.description,
+                    url: product.url,
+                    price: product.price,
+                    stock: product.stock
                 }
             })
             return { status: "success", message: "product update", payload:result }
-        } catch {
+        } catch (error) {
              return {status:"error",error:error}
         }
     }
-    Delete = async (_id) => {
+    Delete = async (id) => {
         if (!id) return { status: "error", error: "Id needed" }
         try {
             let result = await productService.deleteOne({
-                id: _id
+                _id: id
             })
             return { status: "success", message: "product delete", payload:result }
         } catch (error) {

@@ -1,0 +1,16 @@
+[2022-07-29T12:55:52.469] [ERROR] file2 - Error: Invalid login: 535 Authentication failed
+    at SMTPConnection._formatError (C:\Users\pca\Downloads\Sublime Text 3\las clases\backend\finalProject\node_modules\nodemailer\lib\smtp-connection\index.js:787:19)
+    at SMTPConnection._actionAUTHComplete (C:\Users\pca\Downloads\Sublime Text 3\las clases\backend\finalProject\node_modules\nodemailer\lib\smtp-connection\index.js:1539:34)
+    at SMTPConnection.<anonymous> (C:\Users\pca\Downloads\Sublime Text 3\las clases\backend\finalProject\node_modules\nodemailer\lib\smtp-connection\index.js:543:26)
+    at SMTPConnection._processResponse (C:\Users\pca\Downloads\Sublime Text 3\las clases\backend\finalProject\node_modules\nodemailer\lib\smtp-connection\index.js:950:20)
+    at SMTPConnection._onData (C:\Users\pca\Downloads\Sublime Text 3\las clases\backend\finalProject\node_modules\nodemailer\lib\smtp-connection\index.js:752:14)
+    at TLSSocket.SMTPConnection._onSocketData (C:\Users\pca\Downloads\Sublime Text 3\las clases\backend\finalProject\node_modules\nodemailer\lib\smtp-connection\index.js:191:44)
+    at TLSSocket.emit (node:events:527:28)
+    at addChunk (node:internal/streams/readable:315:12)
+    at readableAddChunk (node:internal/streams/readable:289:9)
+    at TLSSocket.Readable.push (node:internal/streams/readable:228:10) {
+  code: 'EAUTH',
+  response: '535 Authentication failed',
+  responseCode: 535,
+  command: 'AUTH PLAIN'
+}

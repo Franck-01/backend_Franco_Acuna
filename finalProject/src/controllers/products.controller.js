@@ -1,6 +1,7 @@
 const { logConsole, logWarn } = require("../services/users.services.js")
 const { productDAO } = require('../DAOS/index.js')
 const admin = require('./admin.controller.js')
+const io = require("../app.js")
 
 const productServices = new productDAO()
 
@@ -18,8 +19,15 @@ const Admin = (req, res, next) => {
 }
 
 const getProduct = async (req, res) => {
-    productServices.Read()
-        .then(products => res.render('product.ejs', { products: products }))
+    io.on("connection", async socket => {
+        logConsole.info("connection")
+        socket.on("sendProduct", async body => {
+            let products = await productServices.Read()
+            io.emit("productLog", products)
+        })
+    })
+    res.render('product.ejs', { products:products })
+    .then((result) => res.send(result))
     logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
 }
 const getProductId = async (req, res) => {
@@ -30,7 +38,14 @@ const getProductId = async (req, res) => {
 }
 const postProduct = async (req, res) => {
     let body = req.body
-    await productServices.Create(body)
+    io.on("connection", async socket => {
+        logConsole.info("connection")
+        socket.on("sendProduct", async body => {
+            let products = await productServices.Create(body)
+            io.emit("productLog", products)
+        })
+    })
+    products.push(body)
         .then((result) => res.send(result))
     logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
 }

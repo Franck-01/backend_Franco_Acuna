@@ -1,15 +1,13 @@
-const { createTransport } = require('nodemailer')
+const { SMTPClient } = require('emailjs')
 
 const EMAIL = 'franconacuna5701@gmail.com'
-const PASSWORD = 'MG9RpBM9ZDDXbcUp53'
+const PASSWORD = '3QkQmHHh-BH60SVrRzUc8'
 
-const transporter = createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
-  auth: {
-    user: EMAIL,
-    pass: PASSWORD
-  }
+const client = new SMTPClient({
+  user: EMAIL,
+  password: PASSWORD,
+  host: 'smtp.your-email.com',
+  ssl: true
 })
 
-module.exports = { EMAIL, transporter}
+module.exports = {client, EMAIL}

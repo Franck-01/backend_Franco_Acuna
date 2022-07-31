@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const { userRouter } = require('./router/users.routes.js')
 const { productRouter } = require('./router/products.routes.js')
 const { logConsole, logWarn, logError } = require('./services/users.services.js')
+const {Server} = require('socket.io')
 
 dotenv.config()
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 8030
 const server = app.listen(PORT, () => {
   logConsole.info(`Listening on port ${PORT}`)
 })
+const io = new Server(server)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -45,3 +47,5 @@ app.use(passport.session())
 
 app.use('/', userRouter)
 app.use('/product', productRouter)
+
+module.exports = io

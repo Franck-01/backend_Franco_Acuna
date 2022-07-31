@@ -7,7 +7,6 @@ const userShema = new mongoose.Schema({
   phone: { type: Number },
   age: { type: Number },
   cart: { type: Object },
-  profile_picture: { type: String },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 })

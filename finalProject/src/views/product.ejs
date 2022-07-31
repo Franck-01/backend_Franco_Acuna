@@ -1,15 +1,22 @@
 <h1>Productos disponibles</h1>
-<% if (products.length>0) { %>
-<% products.forEach(product =>{ %>
-            <tbody>
-                <tr>
-                  <th scope="row"><%=product.id%></th>
-                  <td><%=product.name %></td>
-                  <td><%=product.description %></td>
-                  <td><%=product.price %></td>
-</tr>
-            </tbody>
-        <% }) %> 
-        <% } else { %>
-        <p>No hay usuarios por mostrar</p>
-<% } %>
+<div>
+    <form id="shipForm" action="/products" method="post">
+        Name:</br>
+        <input type="text" name="name" /></br>
+        Model:<br>
+        <input type="text" name="model" /></br>
+        Bando:</br>
+        <input type="text" name="bando" /></br>
+        Description:</br>
+        <input type="text" name="description" /></br>
+        URL:</br>
+        <input type="text" name="url" /></br>
+        Price:</br>
+        <input type="number" name="price" /></br>
+        Stock:</br>
+        <input type="number" name="stock" /></br>
+        <input type="submit" value="Create Ship" /></br>
+    </form>
+    <span id="views"></span>
+    
+</div>

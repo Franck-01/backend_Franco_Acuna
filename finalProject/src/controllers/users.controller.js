@@ -1,5 +1,5 @@
 const { logConsole, logWarn, logError } = require("../services/users.services.js")
-const {EMAIL, transporter} = require("../messages/messages.js")
+//const {EMAIL, transporter} = require("../messages/messages.js")
 
 const getHome = async(req, res) => {
     res.render("index.ejs",{prueba:0})
@@ -38,7 +38,7 @@ const getInvalidPassword = async(req, res) => {
     logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)
 }
 const postSignup = async (req, res, next) => {
-    const mailOptions = {
+    /*const mailOptions = {
     from: "FROM SERVER",
     to: 'chad.reynolds79@ethereal.email',
     subject: "Aviso de nuevo usuario ingresado",
@@ -61,7 +61,7 @@ const postSignup = async (req, res, next) => {
     } catch (error) {
         logError.error(error)
         logConsole.error(error)        
-    }
+    }*/
     res.redirect('/profile')
 
     logConsole.info(`${req.method} to ${req.get('host')}${req.originalUrl}`)

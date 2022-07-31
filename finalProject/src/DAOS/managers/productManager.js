@@ -5,8 +5,6 @@ const dotenv = require("dotenv")
 
 dotenv.config()
 
-const URL = process.env.URL
-
 mongoose.connect("mongodb+srv://Franck01:comandante0-1@backendcluster5701.afwv7.mongodb.net/ProyectFinal?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true

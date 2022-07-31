@@ -22,7 +22,6 @@ passport.use('signupS', new LocalStrategy({
   passReqToCallback: true
 }, (req, username, password, done) => {
   User.findOne({ username: username }, (err, userCreated) => {
-    // if (!req.file) return done(null, false, {message: 'couldnt upload avatar'})
     if (err) return done(err)
     if (userCreated) return done(null, false, {
         message: 'user already register'
@@ -32,7 +31,6 @@ passport.use('signupS', new LocalStrategy({
       mail: req.body.mail,
       phone: req.body.phone,
       age: req.body.age,
-      // profile_picture: req.file.filename,
       username: username,
       password: createHash(password),
       isAdmin: req.body.isAdmin || false
